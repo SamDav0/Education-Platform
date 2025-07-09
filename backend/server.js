@@ -1,9 +1,13 @@
 require("dotenv").config()
+
+const cookieParser = require('cookie-parser');
 const express =require("express")
 const app=express()
 const mongoose=require("mongoose")
-app.use(express.json());
+const authRoute=require("./routes/authRoute")
 
+app.use(express.json());
+app.use(cookieParser())
 mongoose.connect(process.env.MONGO_URI)// promise
 .then(()=>{
     app.listen(process.env.PORT,()=>{
@@ -11,3 +15,5 @@ mongoose.connect(process.env.MONGO_URI)// promise
 })
 })
 .catch((error)=>{console.log(error)})
+
+app.use("/api/auth",authRoute)
