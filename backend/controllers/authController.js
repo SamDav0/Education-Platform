@@ -116,3 +116,15 @@ exports.login = async (req, res) => {
   });
   res.json({ message: 'Login successful', token, userId: user._id, role });
 };
+
+exports.getUserInfo = async (req, res) => {
+  try {
+    // req.user is set by protect middleware
+    res.status(200).json({
+      userId: req.user.id,
+      role: req.user.role
+    });
+  } catch (err) {
+    res.status(401).json({ message: 'Not authenticated' });
+  }
+};

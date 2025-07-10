@@ -21,4 +21,6 @@ const isAdmin = async (req, res, next) => {
   next();
 };
 
-module.exports = { protect, isAdmin };
+
+
+module.exports = { protect, isAdmin};
