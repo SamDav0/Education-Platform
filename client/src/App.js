@@ -15,6 +15,7 @@ function App() {
           </ProtectedRoute>
         }
       />
+      <Route path="/admin/create" element={<ProtectedRoute allowedRoles={['admin']}><Login/></ProtectedRoute>}/>
       </Routes>
     </BrowserRouter>
   );

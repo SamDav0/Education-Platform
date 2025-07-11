@@ -22,7 +22,14 @@ const Admin = () => {
       [name]: name === 'years' ? value.split(',').map(n => parseInt(n)) : value
     }));
   };
-
+  const handleLogout = async () => {
+  try {
+    await axios.post('/api/auth/logout', {}, { withCredentials: true });
+    window.location.href = '/'; // or use navigate('/') if using react-router
+  } catch (err) {
+    console.error('Logout failed', err);
+  }
+  };
   const handleMultiSelect = (e) => {
     const options = Array.from(e.target.selectedOptions);
     const selectedIds = options.map(o => o.value);
@@ -46,6 +53,9 @@ const Admin = () => {
 
   return (
     <div style={{ padding: '2rem' }}>
+      <button onClick={handleLogout} style={{ float: 'right', marginBottom: '1rem' }}>
+          Logout
+      </button>
       <h2>Admin Panel</h2>
 
       <select value={userType} onChange={(e) => setUserType(e.target.value)} style={{ marginBottom: '1rem' }}>

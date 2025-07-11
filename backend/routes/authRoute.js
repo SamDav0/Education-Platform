@@ -6,7 +6,8 @@ const {
   registerParent,
   registerTeacher,
   registerAdmin,
-  login
+  login,
+  logout
 } = require('../controllers/authController');
 const { protect, isAdmin } = require('../middleware/authMiddleware');
 // Registration routes (admin only)
@@ -16,5 +17,5 @@ router.post('/register-teacher',protect,isAdmin,registerTeacher);
 router.post('/register-admin',registerAdmin);
 router.post('/login', login);
 router.get('/me', protect, getUserInfo);
-
+router.post('/logout', logout);
 module.exports = router;
