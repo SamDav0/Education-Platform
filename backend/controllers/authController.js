@@ -102,7 +102,6 @@ exports.login = async (req, res) => {
     default:
       return res.status(400).json({ message: 'Invalid role' });
   }
-
   const user = await Model.findOne({ username });
   if (!user) return res.status(400).json({ message: 'User not found' });
 
